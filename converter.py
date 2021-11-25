@@ -34,9 +34,18 @@ for file in files:
     year = int(file[layout.find("YYYY"):layout.find("YYYY")+4])
     month = int(file[layout.find("MM"):layout.find("MM")+2])
     day = int(file[layout.find("DD"):layout.find("DD")+2])
-    hour = int(file[layout.find("hh"):layout.find("hh")+2])
-    minute = int(file[layout.find("mm"):layout.find("mm")+2])
-    second = int(file[layout.find("ss"):layout.find("ss")+2])
+    try:
+        hour = int(file[layout.find("hh"):layout.find("hh")+2])
+    except:
+        hour = 0
+    try:
+        minute = int(file[layout.find("mm"):layout.find("mm")+2])
+    except:
+        minute = 0
+    try:
+        second = int(file[layout.find("ss"):layout.find("ss")+2])
+    except:
+        second = 0
     date = datetime.datetime(year=year, month=month, day=day, hour=hour, minute=minute, second=second)
     modTime = time.mktime(date.timetuple())
     os.utime(fileLocation, (modTime, modTime))
